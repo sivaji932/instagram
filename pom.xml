@@ -4,17 +4,22 @@
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.example</groupId>
     <artifactId>instagram-clone</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
+    <name>Instagram Clone</name>
+
     <properties>
+        <!-- Use ONE Java version (choose 11 instead of 1.8) -->
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
     <dependencies>
+
         <!-- Servlet API -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -22,16 +27,55 @@
             <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- Added from your new POM -->
+        <dependency>
+            <groupId>com.oracle.bedrock</groupId>
+            <artifactId>bedrock-runtime-maven</artifactId>
+            <version>5.1.2</version>
+        </dependency>
+
+        <!-- Updated JUnit (avoid old 3.8.1) -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
+        <finalName>instagram-clone</finalName>
+
         <plugins>
+
+            <!-- WAR Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.4.0</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
             </plugin>
+
+            <!-- SonarQube Plugin (from your new POM) -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.0.2</version>
+            </plugin>
+
         </plugins>
     </build>
+
+    <!-- Optional (not really needed, Maven Central is default) -->
+    <pluginRepositories>
+        <pluginRepository>
+            <id>maven-central</id>
+            <url>https://repo1.maven.org/maven2</url>
+        </pluginRepository>
+    </pluginRepositories>
 
 </project>
